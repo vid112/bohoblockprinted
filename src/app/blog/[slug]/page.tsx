@@ -2,7 +2,7 @@ import Link from "next/link";
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { ArrowLeft, ArrowRight } from "lucide-react";
-import { CTASection, PageHero } from "@/components/marketing/PublicPage";
+import { CTASection, PageHero, PUBLIC_IMAGES } from "@/components/marketing/PublicPage";
 import { getPublishedBlogPost, getPublishedBlogPosts } from "@/lib/blog-data";
 import { BRAND } from "@/lib/brand";
 
@@ -46,7 +46,7 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
 
   return <>
     <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify([articleSchema, breadcrumbSchema]).replace(/</g, "\\u003c") }} />
-    <PageHero title={post.title} description={post.excerpt} image={post.featuredImage} primaryHref={post.relatedCategorySlug ? `/category/${post.relatedCategorySlug}` : "/shop"} primaryLabel="Shop Related" secondaryHref="/blog" secondaryLabel="All Articles" />
+    <PageHero title={post.title} description={post.excerpt} image={post.featuredImage} fallbackImage={PUBLIC_IMAGES.journal} primaryHref={post.relatedCategorySlug ? `/category/${post.relatedCategorySlug}` : "/shop"} primaryLabel="Shop Related" secondaryHref="/blog" secondaryLabel="All Articles" />
     <article className="bg-white py-16 lg:py-24"><div className="container-app max-w-4xl">
       <Link href="/blog" className="mb-8 inline-flex items-center gap-2 text-sm font-semibold text-[#276070]"><ArrowLeft size={15} /> Back to journal</Link>
       <div className="mb-10 flex flex-wrap items-center gap-x-5 gap-y-2 border-y border-stone-200 py-4 text-xs text-stone-500"><span>By {post.author}</span>{post.publishedAt ? <time dateTime={post.publishedAt}>{new Date(post.publishedAt).toLocaleDateString("en-US", { month: "long", day: "numeric", year: "numeric" })}</time> : null}<span>{post.category || "Textile guide"}</span></div>

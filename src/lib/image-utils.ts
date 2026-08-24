@@ -13,7 +13,8 @@ export function isValidStoredImage(value: string): boolean {
   if (!value) return false;
   if (
     value.startsWith("/uploads/") ||
-    value.startsWith("/category-images/")
+    value.startsWith("/category-images/") ||
+    value.startsWith("/api/blog-images/")
   ) {
     return true;
   }

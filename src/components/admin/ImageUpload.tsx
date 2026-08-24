@@ -10,6 +10,7 @@ interface ImageUploadProps {
   label?: string;
   helperText?: string;
   multiple?: boolean;
+  uploadEndpoint?: string;
 }
 
 export function ImageUpload({
@@ -18,6 +19,7 @@ export function ImageUpload({
   label = "Product Images",
   helperText = "First image = main product photo",
   multiple = true,
+  uploadEndpoint = "/api/admin/upload",
 }: ImageUploadProps) {
   const [uploading, setUploading] = useState(false);
   const [uploadCount, setUploadCount] = useState(0);
@@ -29,7 +31,7 @@ export function ImageUpload({
     const formData = new FormData();
     formData.append("file", file);
 
-    const res = await fetch("/api/admin/upload", { method: "POST", body: formData });
+    const res = await fetch(uploadEndpoint, { method: "POST", body: formData });
     const data = await res.json();
 
     if (!res.ok) {

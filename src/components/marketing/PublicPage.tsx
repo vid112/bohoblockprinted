@@ -3,6 +3,7 @@ import Link from "next/link";
 import type { ReactNode } from "react";
 import { ArrowRight, CheckCircle2, Headphones, PackageCheck, RefreshCcw, ShieldCheck, Sparkles, Truck } from "lucide-react";
 import { BRAND } from "@/lib/brand";
+import { BlogFeaturedImage } from "@/components/blog/BlogFeaturedImage";
 
 export const PUBLIC_IMAGES = {
   hero: "/Banner 2.png",
@@ -37,6 +38,7 @@ type PageHeroProps = {
   secondaryLabel?: string;
   imagePosition?: string;
   imageFit?: "cover" | "contain";
+  fallbackImage?: string;
   children?: ReactNode;
 };
 
@@ -50,6 +52,7 @@ export function PageHero({
   secondaryLabel,
   imagePosition = "center",
   imageFit = "cover",
+  fallbackImage,
   children,
 }: PageHeroProps) {
   return (
@@ -87,15 +90,26 @@ export function PageHero({
         </div>
 
         <div className="relative min-h-[360px] overflow-hidden rounded-[1.25rem] bg-brand-50 shadow-2xl shadow-brand-950/10 lg:min-h-[520px]">
-          <Image
-            src={image}
-            alt={title}
-            fill
-            priority
-            sizes="(max-width: 1024px) 100vw, 52vw"
-            className={imageFit === "contain" ? "object-contain" : "object-cover"}
-            style={{ objectPosition: imagePosition }}
-          />
+          {fallbackImage ? (
+            <BlogFeaturedImage
+              src={image}
+              fallbackSrc={fallbackImage}
+              alt={title}
+              priority
+              sizes="(max-width: 1024px) 100vw, 52vw"
+              className={imageFit === "contain" ? "object-contain" : "object-cover"}
+            />
+          ) : (
+            <Image
+              src={image}
+              alt={title}
+              fill
+              priority
+              sizes="(max-width: 1024px) 100vw, 52vw"
+              className={imageFit === "contain" ? "object-contain" : "object-cover"}
+              style={{ objectPosition: imagePosition }}
+            />
+          )}
           <div className="absolute inset-x-0 bottom-0 h-28 bg-gradient-to-t from-brand-950/45 to-transparent" />
         </div>
       </div>
