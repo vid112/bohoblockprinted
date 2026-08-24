@@ -5,7 +5,7 @@ import { Coupon } from "@/models/Coupon";
 
 export async function POST(request: NextRequest) {
   try {
-    const { code, subtotal, currency = "USD" } = await request.json();
+    const { code, subtotal, currency = "INR" } = await request.json();
 
     if (!code) {
       return NextResponse.json({ error: "Coupon code required" }, { status: 400 });

@@ -20,9 +20,9 @@ import type { CurrencyCode } from "@/types";
 
 /* ==========================================
    DASHBOARD CURRENCY
-   Force all dashboard prices to USD
+   Display dashboard prices in INR by default
 ========================================== */
-const DASHBOARD_CURRENCY: CurrencyCode = "USD";
+const DASHBOARD_CURRENCY: CurrencyCode = "INR";
 
 /* ==========================================
    TYPES

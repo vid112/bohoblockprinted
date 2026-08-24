@@ -36,7 +36,7 @@ export default function AdminCustomersPage() {
             <td className="p-4"><a href={`mailto:${customer.email}`} className="font-medium text-brand-700 hover:underline">{customer.email}</a><p className="mt-1 text-xs text-gray-500">{customer.phone || "No phone added"}</p></td>
             <td className="p-4">{customer.emailVerifiedAt ? <span className="inline-flex items-center gap-1 rounded-full bg-emerald-50 px-2 py-1 text-xs font-semibold text-emerald-700"><ShieldCheck size={13} /> Email verified</span> : <span className="text-xs text-amber-700">Not verified</span>}</td>
             <td className="p-4"><p className="font-medium text-gray-800">{customer.loginCount || 0} logins</p><p className="mt-1 text-xs text-gray-500">{customer.lastLoginAt ? `Last: ${new Date(customer.lastLoginAt).toLocaleString("en-IN")}` : "No login recorded"}</p></td>
-            <td className="p-4"><p className="font-semibold">{customer.orderCount} orders</p><p className="mt-1 text-xs text-gray-500">{formatPrice(customer.totalSpent || 0, "USD")}</p></td>
+            <td className="p-4"><p className="font-semibold">{customer.orderCount} orders</p><p className="mt-1 text-xs text-gray-500">{formatPrice(customer.totalSpent || 0, "INR")}</p></td>
             <td className="p-4"><p>{customer.wishlistCount} wishlist</p><p className="mt-1 text-xs text-gray-500">{customer.addressCount} addresses</p></td>
             <td className="p-4 text-xs text-gray-500">{new Date(customer.createdAt).toLocaleDateString("en-IN", { day: "2-digit", month: "short", year: "numeric" })}</td>
           </tr>)}</tbody></table></div>

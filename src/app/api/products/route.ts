@@ -9,7 +9,7 @@ import {
   getCanonicalCategorySlug,
 } from "@/lib/category-aliases";
 import { toPublicProductRating } from "@/lib/public-rating";
-import { usdToInr } from "@/lib/public-pricing";
+import { inrToUsd } from "@/lib/public-pricing";
 
 function getList(searchParams: URLSearchParams, key: string) {
   return searchParams
@@ -108,12 +108,12 @@ export async function GET(request: NextRequest) {
       const usdPrice: Record<string, number> = {};
       const inrPrice: Record<string, number> = {};
       if (Number.isFinite(minPrice) && minPrice >= 0) {
-        usdPrice.$gte = minPrice;
-        inrPrice.$gte = usdToInr(minPrice);
+        usdPrice.$gte = inrToUsd(minPrice);
+        inrPrice.$gte = minPrice;
       }
       if (Number.isFinite(maxPrice) && maxPrice >= 0) {
-        usdPrice.$lte = maxPrice;
-        inrPrice.$lte = usdToInr(maxPrice);
+        usdPrice.$lte = inrToUsd(maxPrice);
+        inrPrice.$lte = maxPrice;
       }
       if (Object.keys(usdPrice).length) {
         andConditions.push({

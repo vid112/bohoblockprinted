@@ -42,8 +42,8 @@ export default async function ProductPage({ params }: ProductPageProps) {
   const lowPrice = Math.min(...prices);
   const highPrice = Math.max(...prices);
   const offer = lowPrice === highPrice
-    ? { "@type": "Offer", url: productUrl, priceCurrency: product.currency || "USD", price: lowPrice, availability: product.totalStock > 0 ? "https://schema.org/InStock" : "https://schema.org/OutOfStock", itemCondition: "https://schema.org/NewCondition" }
-    : { "@type": "AggregateOffer", url: productUrl, priceCurrency: product.currency || "USD", lowPrice, highPrice, offerCount: product.variants?.length || 1, availability: product.totalStock > 0 ? "https://schema.org/InStock" : "https://schema.org/OutOfStock" };
+    ? { "@type": "Offer", url: productUrl, priceCurrency: product.currency || "INR", price: lowPrice, availability: product.totalStock > 0 ? "https://schema.org/InStock" : "https://schema.org/OutOfStock", itemCondition: "https://schema.org/NewCondition" }
+    : { "@type": "AggregateOffer", url: productUrl, priceCurrency: product.currency || "INR", lowPrice, highPrice, offerCount: product.variants?.length || 1, availability: product.totalStock > 0 ? "https://schema.org/InStock" : "https://schema.org/OutOfStock" };
   const productSchema: Record<string, unknown> = {
     "@context": "https://schema.org", "@type": "Product", "@id": `${productUrl}#product`, name: product.name,
     description: product.metaDescription || product.shortDescription || plainText(product.description).slice(0, 500),

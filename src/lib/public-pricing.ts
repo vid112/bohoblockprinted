@@ -19,21 +19,23 @@ type PriceBearingProduct = {
   variants?: Product["variants"];
 };
 
-export function toPublicUsdProduct<T extends PriceBearingProduct>(product: T): T {
-  if (product.currency === "USD") return product;
+export function toPublicInrProduct<T extends PriceBearingProduct>(product: T): T {
+  if (product.currency !== "USD") {
+    return { ...product, currency: "INR" } as T;
+  }
 
   return {
     ...product,
-    price: inrToUsd(product.price),
+    price: usdToInr(product.price),
     compareAtPrice:
       product.compareAtPrice === undefined
         ? undefined
-        : inrToUsd(product.compareAtPrice),
-    currency: "USD",
+        : usdToInr(product.compareAtPrice),
+    currency: "INR",
     variants: product.variants?.map((variant) => ({
       ...variant,
       price:
-        variant.price === undefined ? undefined : inrToUsd(variant.price),
+        variant.price === undefined ? undefined : usdToInr(variant.price),
     })),
   } as T;
 }

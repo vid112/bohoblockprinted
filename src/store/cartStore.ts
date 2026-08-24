@@ -3,11 +3,13 @@
 import { create } from "zustand";
 import { persist } from "zustand/middleware";
 import type { CartItem } from "@/types";
+import { usdToInr } from "@/lib/public-pricing";
 
 interface CartState {
   items: CartItem[];
   hasHydrated: boolean;
   setHasHydrated: (value: boolean) => void;
+  normalizeCurrency: () => void;
   addItem: (item: CartItem) => void;
   removeItem: (productId: string, size: string, color: string, fabric?: string) => void;
   updateQuantity: (productId: string, size: string, color: string, quantity: number, fabric?: string) => void;
@@ -29,6 +31,11 @@ export const useCartStore = create<CartState>()(
       items: [],
       hasHydrated: false,
       setHasHydrated: (value) => set({ hasHydrated: value }),
+      normalizeCurrency: () => set((state) => ({
+        items: state.items.map((item) => item.currency === "USD"
+          ? { ...item, price: usdToInr(item.price), currency: "INR" as const }
+          : { ...item, currency: "INR" as const }),
+      })),
 
       addItem: (item) => {
         set((state) => {
@@ -143,7 +150,10 @@ export const useCartStore = create<CartState>()(
     {
       name: "bohoblockprinted-cart",
       partialize: (state) => ({ items: state.items }),
-      onRehydrateStorage: () => (state) => state?.setHasHydrated(true),
+      onRehydrateStorage: () => (state) => {
+        state?.normalizeCurrency();
+        state?.setHasHydrated(true);
+      },
     }
   )
 );

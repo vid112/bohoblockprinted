@@ -1,4 +1,4 @@
-import { toPublicUsdProduct } from "@/lib/public-pricing";
+import { toPublicInrProduct } from "@/lib/public-pricing";
 import type { Product } from "@/types";
 
 type ReviewLike = {
@@ -31,7 +31,7 @@ export function toPublicProductRating<T extends ProductWithRating>(
     const rating =
       visibleReviews.reduce((sum, review) => sum + review.rating, 0) /
       visibleReviews.length;
-    return toPublicUsdProduct({
+    return toPublicInrProduct({
       ...product,
       sourceReviews: eligibleSourceReviews,
       rating: Math.round(rating * 10) / 10,
@@ -40,13 +40,13 @@ export function toPublicProductRating<T extends ProductWithRating>(
   }
 
   if (product.rating >= 3 && product.rating <= 5) {
-    return toPublicUsdProduct({
+    return toPublicInrProduct({
       ...product,
       sourceReviews: eligibleSourceReviews,
     });
   }
 
-  return toPublicUsdProduct({
+  return toPublicInrProduct({
     ...product,
     sourceReviews: eligibleSourceReviews,
     rating: 0,
