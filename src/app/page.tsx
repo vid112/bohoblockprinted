@@ -13,6 +13,9 @@ import {
 import { ProductionProcess } from "@/components/brand/ProductionProcess";
 import type { Metadata } from "next";
 
+// Temporarily hidden until the store owner asks to show categories again.
+const SHOW_HOME_CATEGORIES = false;
+
 export const metadata: Metadata = {
   title: "Hand Block Printed Textiles from Jaipur",
   description: "Shop authentic hand block printed bedding, table linen, bandanas, kaftans, sarongs, bags, curtains, fabric, and wholesale textiles handmade in Jaipur.",
@@ -35,7 +38,7 @@ export default function HomePage() {
 
       <HeroIntroText />
 
-      <CategoryGrid />
+      {SHOW_HOME_CATEGORIES ? <CategoryGrid /> : null}
 
       <FeaturedProducts />
 
