@@ -14,6 +14,9 @@ import { Button } from "@/components/ui/Button";
 import { COLORS, FABRICS, SIZES } from "@/lib/constants";
 import type { Category, Product } from "@/types";
 
+// Temporarily hidden until the store owner asks to show shop categories again.
+const SHOW_SHOP_CATEGORIES = false;
+
 type ShopFilters = {
   gender: string;
   categories: string[];
@@ -55,32 +58,34 @@ function FilterPanel({
 }: FilterPanelProps) {
   return (
     <div className="space-y-7">
-      <fieldset>
-        <legend className="mb-3 text-xs font-bold uppercase tracking-[0.16em] text-[#173f4f]">
-          Category
-        </legend>
-        <div className="max-h-64 space-y-2.5 overflow-y-auto pr-2 [scrollbar-color:#a9b4aa_transparent] [scrollbar-width:thin]">
-          {categoryOptions.map((category) => (
-            <label
-              key={category.slug}
-              className="flex cursor-pointer items-start gap-2.5 text-sm leading-5 text-stone-700"
-            >
-              <input
-                type="checkbox"
-                checked={filters.categories.includes(category.slug)}
-                onChange={() => onListToggle("category", category.slug)}
-                className="mt-1 accent-[#173f4f]"
-              />
-              <span className="flex min-w-0 flex-1 items-start justify-between gap-2">
-                <span className="break-words">{category.name}</span>
-                <span className="shrink-0 rounded-full bg-stone-100 px-2 py-0.5 text-xs tabular-nums text-stone-500">
-                  {category.productCount ?? 0}
+      {SHOW_SHOP_CATEGORIES ? (
+        <fieldset>
+          <legend className="mb-3 text-xs font-bold uppercase tracking-[0.16em] text-[#173f4f]">
+            Category
+          </legend>
+          <div className="max-h-64 space-y-2.5 overflow-y-auto pr-2 [scrollbar-color:#a9b4aa_transparent] [scrollbar-width:thin]">
+            {categoryOptions.map((category) => (
+              <label
+                key={category.slug}
+                className="flex cursor-pointer items-start gap-2.5 text-sm leading-5 text-stone-700"
+              >
+                <input
+                  type="checkbox"
+                  checked={filters.categories.includes(category.slug)}
+                  onChange={() => onListToggle("category", category.slug)}
+                  className="mt-1 accent-[#173f4f]"
+                />
+                <span className="flex min-w-0 flex-1 items-start justify-between gap-2">
+                  <span className="break-words">{category.name}</span>
+                  <span className="shrink-0 rounded-full bg-stone-100 px-2 py-0.5 text-xs tabular-nums text-stone-500">
+                    {category.productCount ?? 0}
+                  </span>
                 </span>
-              </span>
-            </label>
-          ))}
-        </div>
-      </fieldset>
+              </label>
+            ))}
+          </div>
+        </fieldset>
+      ) : null}
 
       <fieldset>
         <legend className="mb-3 text-xs font-bold uppercase tracking-[0.16em] text-[#173f4f]">
@@ -415,7 +420,7 @@ function ShopContent() {
         </div>
       </div>
 
-      {categoryOptions.length > 0 ? (
+      {SHOW_SHOP_CATEGORIES && categoryOptions.length > 0 ? (
         <div className="-mx-4 mb-6 overflow-x-auto px-4 pb-1 [scrollbar-width:none] sm:-mx-6 sm:px-6 lg:hidden [&::-webkit-scrollbar]:hidden">
           <div className="flex w-max gap-2">
             <button
