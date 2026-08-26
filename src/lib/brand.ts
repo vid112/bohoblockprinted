@@ -115,6 +115,7 @@ const HEADER_HIDDEN_SUBCATEGORY_SLUGS: ReadonlySet<string> = new Set([
   "quilted-tote-bags",
   "cosmetic-bags",
   "duffle-bags",
+  "block-print-fabric-by-yard",
 ]);
 
 export const PRIMARY_NAV = [
