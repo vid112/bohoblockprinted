@@ -108,13 +108,24 @@ export const CATEGORY_GROUPS = [
   },
 ] as const;
 
+const HEADER_HIDDEN_SUBCATEGORY_SLUGS: ReadonlySet<string> = new Set([
+  "curtains",
+  "table-runners",
+  "beach-cover-ups",
+  "quilted-tote-bags",
+  "cosmetic-bags",
+  "duffle-bags",
+]);
+
 export const PRIMARY_NAV = [
   { label: "Home", href: "/" },
   { label: "Shop", href: "/shop" },
   ...CATEGORY_GROUPS.map((category) => ({
     label: category.name,
     href: category.href,
-    children: category.subcategories.map((item) => ({ label: item.name, href: item.href })),
+    children: category.subcategories
+      .filter((item) => !HEADER_HIDDEN_SUBCATEGORY_SLUGS.has(item.slug))
+      .map((item) => ({ label: item.name, href: item.href })),
   })),
   { label: "Wholesale", href: "/wholesale" },
   { label: "About Us", href: "/about" },
