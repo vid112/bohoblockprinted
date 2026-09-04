@@ -13,8 +13,7 @@ import {
 import { ProductionProcess } from "@/components/brand/ProductionProcess";
 import type { Metadata } from "next";
 
-// Temporarily hidden until the store owner asks to show categories again.
-const SHOW_HOME_CATEGORIES = false;
+const SHOW_HOME_CATEGORIES = true;
 
 export const metadata: Metadata = {
   title: "Hand Block Printed Textiles from Jaipur",

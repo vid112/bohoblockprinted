@@ -14,8 +14,7 @@ import { Button } from "@/components/ui/Button";
 import { COLORS, FABRICS, SIZES } from "@/lib/constants";
 import type { Category, Product } from "@/types";
 
-// Temporarily hidden until the store owner asks to show shop categories again.
-const SHOW_SHOP_CATEGORIES = false;
+const SHOW_SHOP_CATEGORIES = true;
 
 type ShopFilters = {
   gender: string;
