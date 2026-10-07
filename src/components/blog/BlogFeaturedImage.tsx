@@ -12,6 +12,14 @@ type BlogFeaturedImageProps = {
   priority?: boolean;
 };
 
+const BLOG_IMAGE_CACHE_VERSION = "2";
+
+function versionBlogImage(src: string) {
+  if (!src.startsWith("/api/blog-images/")) return src;
+  const separator = src.includes("?") ? "&" : "?";
+  return `${src}${separator}v=${BLOG_IMAGE_CACHE_VERSION}`;
+}
+
 export function BlogFeaturedImage({
   src,
   alt,
@@ -20,11 +28,13 @@ export function BlogFeaturedImage({
   className,
   priority = false,
 }: BlogFeaturedImageProps) {
-  const [activeSrc, setActiveSrc] = useState(src || fallbackSrc);
+  const resolvedSrc = versionBlogImage(src || fallbackSrc);
+  const resolvedFallbackSrc = versionBlogImage(fallbackSrc);
+  const [activeSrc, setActiveSrc] = useState(resolvedSrc);
 
   useEffect(() => {
-    setActiveSrc(src || fallbackSrc);
-  }, [src, fallbackSrc]);
+    setActiveSrc(resolvedSrc);
+  }, [resolvedSrc]);
 
   return (
     <Image
@@ -36,7 +46,7 @@ export function BlogFeaturedImage({
       unoptimized={activeSrc.startsWith("/api/blog-images/")}
       className={className}
       onError={() => {
-        if (activeSrc !== fallbackSrc) setActiveSrc(fallbackSrc);
+        if (activeSrc !== resolvedFallbackSrc) setActiveSrc(resolvedFallbackSrc);
       }}
     />
   );
