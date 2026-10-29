@@ -158,8 +158,21 @@ export default function RootLayout({
             __html: JSON.stringify(structuredData).replace(/</g, "\\u003c"),
           }}
         />
-
-        <Providers>
+        
+<Script
+  src="https://www.googletagmanager.com/gtag/js?id=G-JYVK8ZETV3"
+  strategy="afterInteractive"
+/>
+<Script id="google-analytics" strategy="afterInteractive">
+  {`
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){window.dataLayer.push(arguments);}
+    window.gtag = gtag;
+    gtag('js', new Date());
+    gtag('config', 'G-JYVK8ZETV3');
+  `}
+</Script>
+       <Providers>
           <SiteChrome>{children}</SiteChrome>
         </Providers>
       </body>
