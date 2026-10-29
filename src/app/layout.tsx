@@ -1,3 +1,4 @@
+
 import type { Metadata } from "next";
 import { Inter, Playfair_Display } from "next/font/google";
 import { SiteChrome } from "@/components/layout/SiteChrome";
@@ -16,6 +17,7 @@ const playfair = Playfair_Display({
 });
 
 const PRIMARY_IMAGE_URL = `${BRAND.url}/image.png`;
+
 const structuredData = {
   "@context": "https://schema.org",
   "@graph": [
@@ -49,15 +51,17 @@ const structuredData = {
   ],
 };
 
-
 export const metadata: Metadata = {
   metadataBase: new URL(BRAND.url),
+
   title: {
     default: "BOHOBLOCKPRINTED | Hand Block Printed Textiles from Jaipur",
     template: "%s | BOHOBLOCKPRINTED",
   },
+
   description:
     "Shop hand block printed home decor, table linen, fashion, accessories, fabric by yard, custom orders, and wholesale textiles from Jaipur, India.",
+
   keywords: [
     "hand block printed textiles",
     "Jaipur block print",
@@ -66,30 +70,58 @@ export const metadata: Metadata = {
     "block print fabric",
     "wholesale textiles",
   ],
+
   verification: {
     google: "kAvuU69BKVApfTOq5W9NrOTL26-saWwTuGo069NiJS0",
   },
-};
 
   icons: {
-    icon: [{ url: "/favicon.png", type: "image/png", sizes: "192x192" }],
-    shortcut: [{ url: "/favicon.png", type: "image/png", sizes: "192x192" }],
-    apple: [{ url: "/Logo.png", type: "image/png", sizes: "500x500" }],
+    icon: [
+      {
+        url: "/favicon.png",
+        type: "image/png",
+        sizes: "192x192",
+      },
+    ],
+    shortcut: [
+      {
+        url: "/favicon.png",
+        type: "image/png",
+        sizes: "192x192",
+      },
+    ],
+    apple: [
+      {
+        url: "/Logo.png",
+        type: "image/png",
+        sizes: "500x500",
+      },
+    ],
   },
+
   openGraph: {
     type: "website",
     url: BRAND.url,
     siteName: BRAND.name,
     title: "BOHOBLOCKPRINTED | Hand Block Printed Textiles from Jaipur",
     description: BRAND.description,
-    images: [{ url: "/image.png", width: 1254, height: 1254, alt: `${BRAND.name} premium hand block printed textiles` }],
+    images: [
+      {
+        url: "/image.png",
+        width: 1254,
+        height: 1254,
+        alt: `${BRAND.name} premium hand block printed textiles`,
+      },
+    ],
   },
+
   twitter: {
     card: "summary_large_image",
     title: "BOHOBLOCKPRINTED | Hand Block Printed Textiles from Jaipur",
     description: BRAND.description,
     images: ["/image.png"],
   },
+
   robots: {
     index: true,
     follow: true,
@@ -117,11 +149,15 @@ export default function RootLayout({
         />
         <link rel="image_src" href={PRIMARY_IMAGE_URL} />
       </head>
+
       <body className="min-h-screen flex flex-col">
         <script
           type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData).replace(/</g, "\\u003c") }}
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify(structuredData).replace(/</g, "\\u003c"),
+          }}
         />
+
         <Providers>
           <SiteChrome>{children}</SiteChrome>
         </Providers>
