@@ -5,6 +5,7 @@ import { SiteChrome } from "@/components/layout/SiteChrome";
 import { Providers } from "@/components/providers/Providers";
 import { BRAND } from "@/lib/brand";
 import "./globals.css";
+import Script from "next/script";
 
 const inter = Inter({
   subsets: ["latin"],
