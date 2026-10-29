@@ -49,6 +49,7 @@ const structuredData = {
   ],
 };
 
+
 export const metadata: Metadata = {
   metadataBase: new URL(BRAND.url),
   title: {
@@ -65,6 +66,11 @@ export const metadata: Metadata = {
     "block print fabric",
     "wholesale textiles",
   ],
+  verification: {
+    google: "kAvuU69BKVApfTOq5W9NrOTL26-saWwTuGo069NiJS0",
+  },
+};
+
   icons: {
     icon: [{ url: "/favicon.png", type: "image/png", sizes: "192x192" }],
     shortcut: [{ url: "/favicon.png", type: "image/png", sizes: "192x192" }],
